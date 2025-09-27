@@ -1,3 +1,6 @@
+# POLYNOMIAL DIVIDER v2 #
+# 2025 ANTIMONYXD #
+
 from os import name, system
 
 
@@ -67,7 +70,7 @@ def zero_float_cast(fl : float):
 def polynomial_division(divis, dividend) -> list:
 
     # creates a copy of dividend with the same length as the divisor
-    dividend_copy = dividend[:len(divis)]
+    sub_dividend = dividend[:len(divis)]
 
     # temporary list to hold the results of subtraction
     temp = []
@@ -79,7 +82,7 @@ def polynomial_division(divis, dividend) -> list:
     for n in range(len(dividend) - len(divis) + 1):
 
         # calculates new coefficient to add to the quotient list
-        new_quot_coeff = zero_float_cast(dividend_copy[0] / divis[0])
+        new_quot_coeff = zero_float_cast(sub_dividend[0] / divis[0])
         
         # adds said coefficient
         quot.append(new_quot_coeff)
@@ -94,7 +97,7 @@ def polynomial_division(divis, dividend) -> list:
             if k != 0:
 
                 # subtracts subtrahend from the dividend copy, to determine the next term of the difference
-                temp.append(dividend_copy[k] - subtrahend)
+                temp.append(sub_dividend[k] - subtrahend)
         
         # if there are any more terms to be brought down
         if n < (len(dividend) - len(divis)):
@@ -103,15 +106,30 @@ def polynomial_division(divis, dividend) -> list:
             temp.append(dividend[n+len(divis)])
 
         # updates dividend_copy
-        dividend_copy = temp
+        sub_dividend = temp
 
         # clears temp list
         temp = []
 
     # grabs the remainder
-    rem = zero_float_cast(dividend_copy[0])
+    rem = zero_float_cast(sub_dividend[0])
     
     return [quot, rem]
+
+
+def get_ordinal(n:int) -> str:
+    
+    n=str(n)
+
+    if n[-1] == "1":
+        n+="st"
+    elif n[-1] == "2":
+        n+="nd"
+    elif n[-1] == "3":
+        n+="rd"
+    else:
+        n+="th"
+    return n
 
 
 divisor_coeffs = []
@@ -131,9 +149,10 @@ for n in range(2):
     else:
         print("--DIVISOR (number you wanted to DIVIDE by)--\n")
 
+    cnt=1
     while ik == "":
         # asks for user input
-        ik = input("Please insert your coefficient (type EXIT if you want to leave): ") 
+        ik = input(f"Please insert the {get_ordinal(cnt)} coefficient (type EXIT if you want to leave): ") 
 
         # if the user inputs exit
         if ik.upper().strip() == "EXIT":
@@ -157,7 +176,8 @@ for n in range(2):
             
             # sets input to empty string to restart the while loop
             ik = ""
-
+        
+        cnt += 1
 
 # Calculates quotient and remainder 
 quotient, remainder = polynomial_division(divisor_coeffs, dividend_coeffs)
