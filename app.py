@@ -1,5 +1,7 @@
 # POLYNOMIAL DIVIDER v2 #
-# 2025 ANTIMONYXD #
+# ANTIMONYXD #
+# Last Edit: Sep. 27, 2025 #
+# https://github.com/antimonyXD #
 
 from os import name, system
 
@@ -88,16 +90,13 @@ def polynomial_division(divis, dividend) -> list:
         quot.append(new_quot_coeff)
 
         # loops through every number from 0 to length of divisor
-        for k in range(len(divis)):
+        for k in range(1, len(divis)):
 
-            # calculates number to get subtracted
+            # calculates number to get subtracted (known in fancy terms as the subtrahend)
             subtrahend = new_quot_coeff * divis[k]
 
-            # 
-            if k != 0:
-
-                # subtracts subtrahend from the dividend copy, to determine the next term of the difference
-                temp.append(sub_dividend[k] - subtrahend)
+            # subtracts subtrahend from the dividend copy, to determine the next term of the difference
+            temp.append(sub_dividend[k] - subtrahend)
         
         # if there are any more terms to be brought down
         if n < (len(dividend) - len(divis)):
