@@ -170,13 +170,15 @@ for n in range(2):
                 else:
                     divisor_coeffs.append(ik)
 
+                cnt += 1
+
             except Exception:
-                pass
+
+                # prints message to let user know their input is void
+                print("INVALID INPUT VOIDED\n")
             
             # sets input to empty string to restart the while loop
             ik = ""
-        
-        cnt += 1
 
 # Calculates quotient and remainder 
 quotient, remainder = polynomial_division(divisor_coeffs, dividend_coeffs)
