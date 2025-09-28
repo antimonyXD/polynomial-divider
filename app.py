@@ -1,4 +1,4 @@
-# POLYNOMIAL DIVIDER v2 #
+# POLYNOMIAL DIVIDER v3 #
 # ANTIMONYXD #
 # Last Edit: Sep. 27, 2025 #
 # https://github.com/antimonyXD #
@@ -36,8 +36,13 @@ def polynomial_to_string(coeffs:list) -> str:
             p_string += f"{coeffs[d]}x^{power}"
 
         else:
-            # If the given coefficient >= 0
-            if coeffs[d] >= 0:
+            
+            # Ignores the term if its coefficient is 0
+            if coeffs[d] == 0:
+                continue
+
+            # If the given coefficient > 0
+            elif coeffs[d] > 0:
 
                 # Adds plus sign and coefficient
                 p_string += f" + {coeffs[d]}"
