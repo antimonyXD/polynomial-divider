@@ -1,6 +1,6 @@
-# POLYNOMIAL DIVIDER v3 #
+# POLYNOMIAL DIVIDER v4 #
 # ANTIMONYXD #
-# Last Edit: Sep. 27, 2025 #
+# Last Edit: Oct. 03, 2025 #
 # https://github.com/antimonyXD #
 
 from os import name, system
@@ -121,7 +121,7 @@ def polynomial_division(divis, dividend) -> list:
     return [quot, rem]
 
 
-def get_ordinal(n:int) -> str:
+def ordinal(n:int) -> str:
     
     n=str(n)
 
@@ -146,36 +146,38 @@ for n in range(2):
     clear()
 
     # input string
-    ik=""
+    user_input:str=""
 
     if n == 0:
-        print("--DIVIDEND (number you wanted to GET divided)--\n")
+        print("--DIVIDEND (higher order polynomial you want to GET divided)--")
     else:
-        print("--DIVISOR (number you wanted to DIVIDE by)--\n")
+        print("--DIVISOR (lower order polynomial you want to DIVIDE by)--")
+    
+    # gives example of how to convert
+    print("For example, P(x) = 5x^4 + 2x^2 - x + 7 should be entered as [5, 0, 2, -1, 7]\nTerms with a coefficient of 0 CANNOT be ignored!!\n")
 
-    cnt=1
-    while ik == "":
+    count=1
+    while user_input == "":
         # asks for user input
-        ik = input(f"Please insert the {get_ordinal(cnt)} coefficient (type EXIT if you want to leave): ") 
+        user_input = input(f"Please insert the {ordinal(count)} coefficient (type EXIT if you want to leave): ") 
 
         # if the user inputs exit
-        if ik.upper().strip() == "EXIT":
+        if user_input.upper().strip() == "EXIT":
 
             # exits the while loop
             break
 
         else:
             try:
-                # converts input to integer
-                ik = int(ik)
 
-                # adds input to coefficient list
+                # adds input in integer form to coefficient list
                 if n==0:
-                    dividend_coeffs.append(ik)
+                    dividend_coeffs.append(int(user_input))
                 else:
-                    divisor_coeffs.append(ik)
+                    divisor_coeffs.append(int(user_input))
 
-                cnt += 1
+                # increments count
+                count += 1
 
             except Exception:
 
@@ -183,7 +185,7 @@ for n in range(2):
                 print("INVALID INPUT VOIDED\n")
             
             # sets input to empty string to restart the while loop
-            ik = ""
+            user_input = ""
 
 # Calculates quotient and remainder 
 quotient, remainder = polynomial_division(divisor_coeffs, dividend_coeffs)
